@@ -9,6 +9,7 @@ from flask import Flask, render_template, request
 from collections import Counter
 from bs4 import BeautifulSoup
 import mysql.connector as mysql
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -53,6 +54,7 @@ def index():
                 errors.append(e)
 
     return render_template('index.html', errors=errors, results=results)
+#    return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)
