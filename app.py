@@ -8,6 +8,7 @@ import requests
 from flask import Flask, render_template, request    
 from collections import Counter
 from bs4 import BeautifulSoup
+import mysql.connector as mysql
 
 app = Flask(__name__)
 
@@ -41,9 +42,17 @@ def index():
                 key=operator.itemgetter(1),
                 reverse=True
                 )[:10]
+            try:
+                mariadb = mysql.connect(user='raj',password='redhat',database='Flask_Project')
+                cursor = mariadb.cursor()
+                query = (f'insert into results values(NULL,"{url}","{raw_words_count}","{no_stop_words_count}");')
+                cursor.execute(query)
+                mariadb.commit()
+                mariadb.close()
+            except Exception as e:
+                errors.append(e)
+
     return render_template('index.html', errors=errors, results=results)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
