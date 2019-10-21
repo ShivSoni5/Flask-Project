@@ -8,7 +8,7 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 mysql-connector-python==8.0.11
-nltk==3.3
+nltk==3.4.5
 protobuf==3.6.0
 redis==2.10.5
 requests==2.19.1
